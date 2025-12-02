@@ -32,8 +32,7 @@ This is what the object can do or what can be done to it
 
 # 4. Encapsulation in OOP
 
-Encapsulation is one of the core principles of Object-Oriented Programming (OOP). 
-It refers to the practice of keeping fields (attributes) private and providing access to them via 
+Encapsulation refers to the practice of keeping fields (attributes) private and providing access to them via 
 public methods, often known as getters and setters. 
 
 The main purpose of encapsulation is to protect the internal state of an object and ensure 
@@ -55,28 +54,26 @@ For example, you can deposit money or withdraw money, but there could be checks 
 
 # 4.2 Why is Encapsulation Useful?
 
-- **Data Protection**: By making fields private, you prevent external code from accessing or 
+- **Data Protection**: By making fields private, you prevent/stop external code from accessing or 
 modifying the internal state directly. This ensures that the object’s data can only be modified 
 via controlled methods.
 
-**Flexibility**: If you later want to change how the balance is calculated or add additional validation, 
+- **Flexibility**: If you later want to change how the balance is calculated or add additional validation, 
 you can do so without changing the interface that users of the BankAccount class rely on.
 
-**Maintainability**: Encapsulation allows for better maintainability. 
+- **Maintainability**: Encapsulation allows for better maintainability. 
 You can change the internal implementation (e.g., how the balance is calculated) 
 without affecting external classes that use your object.
 
 # 5.1 Abstraction in OOP
 
-Abstraction is one of the core concepts of Object-Oriented Programming (OOP). 
-It refers to the process of hiding the complex implementation details of a system and 
+Abstraction refers to the process of hiding the complex implementation details of a system and 
 exposing only the essential features or functionalities to the outside world. 
 This helps to reduce complexity and allows a programmer to focus on interactions at a higher level.
 
 In simple terms, abstraction lets you define what a system does without having 
 to know how it does it.
 
-Abstraction helps developers focus on what the system does rather than how it does it. 
 It allows for a cleaner, easier-to-understand interface, making code more modular, flexible, 
 and easier to maintain.
 
@@ -187,8 +184,6 @@ changing the implementation without affecting other parts of the code.
 
 # 6. What is polymorphism in OOP
 
-
-Polymorphism is one of the key concepts of Object-Oriented Programming (OOP).  
 In the context of OOP, polymorphism refers to the ability of a single function, method, or operator 
 to operate in different ways depending on the context.
 
@@ -242,3 +237,265 @@ override methods to introduce new behavior.
 4. **Improved Readability**: It simplifies the code because you can use the same method name 
 across different types of objects, reducing the need to create distinct method names for 
 each specific case.
+
+
+Below is a **complete explanation of *Inheritance*** written in the **same structured, clear, and detailed style** as all the topics you provided above.
+This will help you maintain consistency in your notes and understanding.
+
+---
+
+# **6. Inheritance in OOP (Explained Like Previous Sections)**
+
+# **6.1 What is Inheritance?**
+
+**Inheritance** is an important pillar of Object-Oriented Programming that allows one class (called the *child class* or *subclass*) to inherit the properties and behaviors (fields and methods) of another class (called the *parent class* or *superclass*).
+
+In simple terms:
+
+> **Inheritance allows you to create a new class based on an existing class.**
+> The new class automatically gets the fields and methods of the old class, and can also add its own.
+
+This promotes **code reuse**, improves **maintainability**, and supports **hierarchical relationships** between classes.
+
+
+
+# **6.2 Why is Inheritance Used? (Key Objectives)**
+
+### **1. Code Reusability**
+
+Instead of writing the same code in multiple classes, it can be written once in the parent class and inherited wherever needed.
+
+### **2. Method Overriding (Runtime Polymorphism)**
+
+Inheritance supports polymorphism by allowing subclasses to change (override) the behavior of inherited methods.
+
+### **3. Hierarchical Classification**
+
+It helps model real-world relationships. Example:
+`Animal` → `Dog` → `Puppy`
+
+### **4. Easy Maintenance**
+
+Fixing/improving the parent class automatically affects all subclasses.
+
+
+# **6.3 Key Terminology in Inheritance**
+
+| Term                                     | Meaning                                                           |
+| ---------------------------------------- | ----------------------------------------------------------------- |
+| **Parent Class (Superclass)**            | The class whose properties are inherited                          |
+| **Child Class (Subclass/Derived Class)** | The class that inherits from the parent class                     |
+| **extends keyword (Java)**               | Used by the subclass to inherit from the superclass               |
+| **super keyword (Java)**                 | Used to access parent class members (methods/fields/constructors) |
+
+
+# **6.4 Types of Inheritance (In Java)**
+
+Java supports:
+
+1. **Single Inheritance**
+   → One class inherits from one parent
+   `class Dog extends Animal`
+
+2. **Multilevel Inheritance**
+   → A chain of inheritance
+   `Animal → Dog → Puppy`
+
+3. **Hierarchical Inheritance**
+   → Multiple classes inherit from a single parent
+   `Animal → Dog, Cat, Cow`
+
+Java **does NOT support multiple inheritance through classes** (to avoid ambiguity like the diamond problem).
+But **multiple inheritance is supported using interfaces**.
+
+
+# **6.5 Example of Inheritance in Java**
+
+### **Parent Class (SuperClass)**
+
+```java
+class Animal {
+    String name;
+
+    void eat() {
+        System.out.println("Animal is eating...");
+    }
+}
+```
+
+### **Child Class (Subclass)**
+
+```java
+class Dog extends Animal {
+
+    void bark() {
+        System.out.println("Dog is barking...");
+    }
+}
+```
+
+### **Usage**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.name = "Tommy";        // inherited field
+        d.eat();                 // inherited method
+        d.bark();                // own method
+    }
+}
+```
+
+Output:
+
+```
+Animal is eating...
+Dog is barking...
+```
+
+# **6.6 Important Points About Inheritance**
+
+1. **Child class automatically gets all non-private fields and methods of parent class.**
+2. **Constructors are NOT inherited**, but the child class calls parent constructor using `super()`.
+3. Private members are not directly inherited but can be accessed using **public/protected getters**.
+4. Inheritance supports **method overriding**, enabling **runtime polymorphism**.
+5. Helps implement **IS-A relationship** (Dog *is a* Animal).
+
+
+# **6.7 When Should You Use Inheritance?**
+
+Use inheritance only when the child class **is a specialized version of the parent class**.
+
+✔ Good example:
+`Car extends Vehicle`
+`Teacher extends Person`
+
+✘ Bad example:
+`Car extends MusicPlayer`
+(No IS-A relationship → use composition instead)
+
+
+
+# **6.8 Real-life Example of Inheritance**
+
+### **Example: Vehicles**
+
+* Parent: `Vehicle`
+  → Common properties: speed, brand
+  → Common behaviors: start(), stop()
+
+* Child: `Car`, `Bike`, `Truck`
+  → Inherits Vehicle properties
+  → Adds unique behaviors like playMusic(), loadCargo(), etc.
+
+This models real-world hierarchy accurately.
+
+
+
+# **6.9 super Keyword in Inheritance**
+
+### **Uses of super**
+
+1. **Call parent class constructor**
+
+```java
+super(); // first line in child constructor
+```
+
+2. **Access parent class method**
+
+```java
+super.eat();
+```
+
+3. **Access parent class field**
+
+```java
+super.name = "Tommy";
+```
+
+---
+
+# **6.10 Method Overriding in Inheritance**
+
+Child class provides its own implementation to a method defined in parent class.
+
+Example:
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+---
+
+# **6.11 Advantages of Inheritance**
+
+1. **Reusability**
+   Common code is written once and reused by multiple classes.
+
+2. **Improves Maintainability**
+   Change in parent reflects in all children.
+
+3. **Polymorphism Support**
+   Achieves runtime polymorphism via method overriding.
+
+4. **Logical Hierarchy Representation**
+   Helps model natural relationships.
+
+5. **Extensibility**
+   Easy to add new child classes without modifying existing code.
+
+---
+
+# **6.12 Disadvantages of Inheritance (Important to Know)**
+
+1. **Tight Coupling**
+   Child depends heavily on parent class structure.
+
+2. **Not always flexible**
+   Wrong use of inheritance creates bad design (use composition instead).
+
+3. **Complex Hierarchies**
+   Too many inheritance levels → confusing and hard to manage.
+
+---
+
+# **6.13 Composition vs Inheritance (Very Important Interview Point)**
+
+| Inheritance                  | Composition                      |
+| ---------------------------- | -------------------------------- |
+| “IS-A” relationship          | “HAS-A” relationship             |
+| Reuse through inheritance    | Reuse through creating objects   |
+| Strong coupling              | Loose coupling                   |
+| Can override parent behavior | More flexible for design changes |
+
+**Rule of thumb:**
+
+> Use inheritance only if a strong *IS-A* relationship exists.
+> Otherwise use composition.
+
+
+**Complete Summary of Inheritance**
+
+* Inheritance allows a class to acquire attributes and methods of another class.
+* Achieved using `extends` in Java.
+* Enables code reuse, polymorphism, and hierarchical design.
+* Supports single, multilevel, and hierarchical inheritance.
+* Does NOT support multiple class inheritance (only with interfaces).
+* Key tools: `super`, overriding, access modifiers.
+* Must be used carefully to avoid tight coupling.
+
+
+
