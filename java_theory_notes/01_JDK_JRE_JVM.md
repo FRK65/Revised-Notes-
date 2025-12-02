@@ -4,7 +4,7 @@
 
 JDK stands for Java Development Kit. It is a software development kit (SDK) used 
 to develop Java applications. 
-The JDK provides everything you need to create Java programs, including:
+The JDK provides everything you need to create Java Application or program, including:
 
 - **Java Compiler (javac)**
 - **Java Runtime Environment (JRE)**
@@ -80,7 +80,7 @@ with the tools to create Java programs.
 # 3. What is JVM
 
 The Java Virtual Machine (JVM) is a core component of the Java Runtime Environment (JRE) that 
-enables Java applications to be platform-independent.
+makes Java applications to be platform-independent.
 
 It provides an abstract layer between the compiled Java bytecode and the underlying hardware 
 and operating system, which allows Java programs to run on any device or operating system that 
