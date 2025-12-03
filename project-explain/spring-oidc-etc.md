@@ -1,0 +1,198 @@
+Perfect! Let’s go step by step. We’ll start with **OIDC**, then move to **Spring Boot Core**, and finally your **project flow explanation**.
+
+---
+
+# ✅ **1️⃣ OIDC (OpenID Connect) — Interview Ready**
+
+---
+
+## **1. What is OIDC? (Simple Explanation)**
+
+* **OIDC = OpenID Connect**, an authentication layer built on top of **OAuth2**.
+* Purpose: To **verify user identity** and provide basic profile info securely.
+* In simple terms: “It tells the system who the user is.”
+
+---
+
+## **2. Why OIDC in your project**
+
+* Vodafone Germany system needed **secure authentication** for users and external partner apps.
+* OIDC ensured:
+
+  * Only authorized users access services
+  * Tokens were generated and verified for secure sessions
+  * Integration with third-party apps without sharing passwords
+
+---
+
+## **3. Components of OIDC**
+
+| Component                | Role                                                     |
+| ------------------------ | -------------------------------------------------------- |
+| **ID Token**             | JWT token that contains user identity information        |
+| **Access Token**         | Token to access protected resources/APIs                 |
+| **Refresh Token**        | Token to get a new access token without logging in again |
+| **Authorization Server** | Issues tokens (e.g., Vodafone Auth server)               |
+| **Client**               | Your service consuming the token                         |
+| **Resource Server**      | API or backend system validating the token               |
+
+---
+
+## **4. How you used OIDC in your project**
+
+1. User logs in via Vodafone portal → Auth server generates **ID + Access tokens**
+2. Your Spring Boot service receives token → validates it
+3. If valid → allows API access and triggers internal workflows
+4. Token expiration handled using **refresh tokens**
+5. Integration with partner apps used the same OIDC flow
+
+**Interview Example:**
+*"When a user logs into Vodafone Germany portal, the OIDC ID token is sent to my service.
+I validate the token, fetch user info, and allow access to entitlement APIs.
+Access and refresh tokens ensure security and seamless user experience."*
+
+---
+
+## **5. Common Interview Questions**
+
+**Q1:** Difference between OAuth2 and OIDC?
+
+* OAuth2 → Authorization (who can access what)
+* OIDC → Authentication (who the user is)
+  *"In my project, OIDC was used to verify identity while OAuth2 scopes controlled resource access."*
+
+**Q2:** What’s in ID token?
+
+* User identity info: username, email, roles, expiry
+
+**Q3:** How do you handle token expiration?
+
+* Use refresh token to get a new access token
+* Validate expiration in Spring Boot service
+
+**Q4:** How does OIDC improve security?
+
+* Tokens replace passwords in API calls
+* Prevents session hijacking
+* Works well with third-party integrations
+
+---
+
+# ✅ **2️⃣ Spring Boot Core — Key Points for Interviews**
+
+---
+
+### **1. Dependency Injection (DI)**
+
+* Allows objects to be **injected automatically** rather than manually creating them
+* Improves **testability & modularity**
+* **Example in project:** `@Autowired` for KafkaConsumerService or UserService
+
+---
+
+### **2. REST APIs**
+
+* **Controller → Service → Repository** pattern
+* **@RestController** for endpoints
+* **@RequestMapping / @PostMapping** for API routes
+* Returns **JSON** to client apps
+
+---
+
+### **3. JPA/Hibernate**
+
+* Maps database tables to Java objects (Entities)
+* Example: `UserEntity` → `users` table
+* CRUD operations with `JpaRepository`
+
+---
+
+### **4. Exception Handling**
+
+* **@ControllerAdvice** + **@ExceptionHandler**
+* Custom exceptions like `UserNotFoundException`
+* Ensures consistent error response
+
+---
+
+### **5. Filters & Interceptors**
+
+* Filters → pre/post processing of requests (e.g., logging, auth)
+* Interceptors → validate OIDC token, check user permissions
+
+---
+
+### **6. Unit Testing**
+
+* **JUnit + Mockito**
+* Test Service layer and API logic without hitting DB
+* Example: Test KafkaConsumerService independently
+
+---
+
+### **7. Spring Boot + Kafka Integration**
+
+* **@KafkaListener** to consume events
+* Producer uses **KafkaTemplate**
+* Handles retry & error management
+
+---
+
+# ✅ **3️⃣ Project Flow Explanation (End-to-End)**
+
+We will explain **step by step, in simple but technical language**.
+
+---
+
+## **1. User Onboarding Flow (Italy Project)**
+
+1. New user data comes from CRM
+2. ULM API receives request → validates user
+3. Stores user in DB via JPA/Hibernate
+4. Kafka publishes “user_created” event for downstream systems
+5. Migration tool ensures legacy users are re-indexed if needed
+6. Deployment and DB changes handled via Liquibase
+
+---
+
+## **2. Entitlement / Provisioning Flow**
+
+1. API receives request to assign plan/add-on
+2. Service layer validates eligibility
+3. Updates DB (via Hibernate)
+4. Publishes Kafka event “plan_assigned”
+5. Notification sent to external system / app
+
+---
+
+## **3. Germany Project Flow (OIDC + Kafka)**
+
+1. User logs in → OIDC token generated by Auth Server
+2. Spring Boot API receives token → validates
+3. Fetches user profile → applies entitlements
+4. Sends events via Kafka to other microservices
+5. Errors handled via retry / dead-letter
+6. Dashboards updated with real-time events
+
+---
+
+### **4. Key Highlights**
+
+* As Italy project’s **main developer**, handled **full lifecycle** (development → deployment → production)
+* As Germany project developer, worked in **Agile team**, focusing on **OIDC, tokens, Kafka, integrations**
+* Both projects used **Liquibase**, **SQL optimization**, **Docker + Jenkins** for deployment
+
+---
+
+# ✅ **Next Steps**
+
+If you want, we can now do **mock interview prep**, including:
+
+* **Java + Spring Boot questions**
+* **Kafka, OIDC, Liquibase scenario-based questions**
+* **Project deep dive questions**
+* **HR round questions**
+
+This will **combine everything we prepared** so you are 100% interview-ready.
+
+Do you want to start **mock interview prep next**?
